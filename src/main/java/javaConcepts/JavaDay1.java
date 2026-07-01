@@ -169,6 +169,33 @@ package javaConcepts;
  *    class, method, interface
  *
  *    "this" vs "Super"
+ *  for example in python
+ *  class User
+ *          __init__(self, firstName,lastName):
+ *              self.firstName = firstName
+ *              self.lastName = lastName
+ *
+ *  class User
+ *  *          __init__(anything, firstName,lastName):
+ *  *              anything.firstName = firstName
+ *  *              anything.lastName = lastName
+ * class User
+ *  *          __init__(this, firstName,lastName):
+ *  *              this.firstName = firstName
+ *  *              this.lastName = lastName
+ *
+ *  In java, we do have this keyword to represent current object
+ *  "this" : refer to current object's field
+ *          call current class method: this.printMyFirstName()
+ *          call another constructor in the same class this(firsName)
+ *          can return "this" : chianing function
+ *          pass current object as a parameter
+ *
+ *    "Super": in java
+ *    we can sue "super" for
+ *    1: points to parent object
+ *    2: call parent's functions
+ *    3: call parent's constructor
  *
  *
  *
