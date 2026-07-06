@@ -40,7 +40,7 @@ package javaConcepts;
  * Key point to hit: TreeMap must compare keys to place them in sorted order (compareTo() or a Comparator),
  * and comparing against null throws NullPointerException. HashMap only needs hashCode()/equals(), and it special-cases null by always placing it in bucket 0. Bonus point: a custom Comparator could theoretically handle nulls, but the natural-ordering default cannot.
  */
- 
+
 public class Day2InterviewQuestions {
 
 }
