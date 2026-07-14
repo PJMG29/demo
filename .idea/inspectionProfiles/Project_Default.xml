@@ -2,7 +2,7 @@
   <profile version="1.0">
     <option name="myName" value="Project Default" />
     <inspection_tool class="JavadocDeclaration" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="ADDITIONAL_TAGS" value="RestController,RequestMapping(method,PathVariable,PutMapping(&quot;/{id}&quot;),Pathvariable,RequestParam(required,Valid,RequestParam" />
+      <option name="ADDITIONAL_TAGS" value="RestController,RequestMapping(method,PathVariable,PutMapping(&quot;/{id}&quot;),Pathvariable,RequestParam(required,Valid,RequestParam,Entity,Table" />
     </inspection_tool>
     <inspection_tool class="SqlNoDataSourceInspection" enabled="false" level="WARNING" enabled_by_default="false" />
   </profile>

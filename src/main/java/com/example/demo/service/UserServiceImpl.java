@@ -20,8 +20,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserResponseDto createUser(UserRequestDto request) {
-        // check both unique fields BEFORE we touch the database with an insert —
-        // same defensive pattern as createBook() checking the ISBN first
+
         userRepository.findByUsername(request.getUsername()).ifPresent(existing -> {
             throw new DuplicateResourceException(
                     "Username '" + request.getUsername() + "' is already taken");
@@ -71,8 +70,7 @@ public class UserServiceImpl implements UserService {
     public UserResponseDto updateUser(Long id, UserRequestDto request) {
         User user = findUserOrThrow(id);
 
-        // only re-check uniqueness if the value is actually changing —
-        // otherwise the user's own current row would "collide with itself"
+
         if (!user.getUsername().equals(request.getUsername())) {
             userRepository.findByUsername(request.getUsername()).ifPresent(existing -> {
                 throw new DuplicateResourceException(
@@ -102,9 +100,7 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
-    // backs the PATCH endpoint — flips active true/false without touching
-    // anything else about the user. This is the whole point of PATCH vs PUT:
-    // PUT replaces the entire resource, PATCH updates one small piece of it.
+
     @Override
     @Transactional
     public UserResponseDto setActiveStatus(Long id, boolean active) {
