@@ -12,42 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
-
-/**
- * @RestController vs @Controller
- * Controller annotation will return a VIEW name (like rendering an html template)
- * restcontroller will just return json data
- * and restcontroller = controller + responseBody
- *
- *
- * you see I have GetMapping, PostMapping, PutMapping, DeleteMapping
- * are just convenience shortcuts
- * you also can have this:
- * @RequestMapping(method = RequestMethod.XX)
- * where XXX can be GET, PUT, POST...
- *
- * we have three ways to get data send from user
- * @PathVariable vs RequestParam vs RequestBody
- * if you want to get data from URL, you can user PathVariable
- * if you want to get data from query String (values after question mark in URL), you can use Requesparam
- * if you want to get data from Json Body, you can use requestbody
- *
- * PUT /api/books/5?noify =true
- * Body{"title": "new title", "author": "Matt"}
- *
- * @PutMapping("/{id}")
- * public ResponseEntity<BooKReponoseDto> updateBook(
- * @Pathvariable Long id -> // extracts "5" from URL
- * @RequestParam(required = false) Boolean notify ->//extracts "true" from query string
- * @Valid @RequestBody BookRequestDto request // extracts data from Json Body
- *
- * ){
- *
- *     // your implementation
- * }
- *
- * @Valid annotation tells springboot: before this method body even runs, validate request against  every bean validation
- */
 @RestController
 @RequestMapping("/api/books")
 @RequiredArgsConstructor
