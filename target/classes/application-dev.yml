@@ -1,0 +1,44 @@
+# ============================================================================
+# DEV PROFILE - active by default (see application.yml: spring.profiles.active: dev)
+# ============================================================================
+# Uses H2, an in-memory database - perfect for learning and local development:
+#   - zero setup required (no need to install/run a real database server)
+#   - data resets every time the app restarts (great for repeatable demos)
+#   - includes a web-based console to inspect the database visually
+# ============================================================================
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:bookstore_dev
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  jpa:
+    # "update": Hibernate automatically creates/updates tables based on our
+    # @Entity classes at startup. GREAT for learning/demos, but in a real
+    # production system this is normally replaced with a proper migration
+    # tool (Flyway or Liquibase), since auto-updating a live production
+    # schema is risky and hard to review/rollback.
+    hibernate:
+      ddl-auto: update
+    show-sql: true          # prints every generated SQL statement to the console -
+    # extremely useful for understanding what JPA is doing
+    properties:
+      hibernate:
+        format_sql: true    # pretty-prints the SQL for readability
+    # IMPORTANT: by default, Spring Boot runs data.sql BEFORE Hibernate has
+    # created the tables (since Hibernate's schema creation happens lazily,
+    # tied to the JPA EntityManagerFactory). This flag defers data.sql until
+    # AFTER Hibernate has finished creating the schema, so our seed data
+    # actually has a table to insert into.
+    defer-datasource-initialization: true
+
+  h2:
+    console:
+      enabled: true          # visit http://localhost:8080/h2-console in a browser
+      path: /h2-console
+
+logging:
+  level:
+    org.hibernate.SQL: debug

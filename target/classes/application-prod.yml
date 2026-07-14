@@ -1,0 +1,36 @@
+# ============================================================================
+# PROD PROFILE - activate with --spring.profiles.active=prod
+# ============================================================================
+# This demonstrates how the SAME application code would connect to a real
+# database in production, with settings sourced from ENVIRONMENT VARIABLES
+# instead of being hard-coded - a critical practice so that credentials
+# never get committed into source control.
+#
+# ${DB_URL} syntax reads from an environment variable; ":defaultValue" after
+# a colon provides a fallback if the environment variable isn't set.
+# ============================================================================
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/bookstore}
+    username: ${DB_USERNAME:bookstore_user}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      # "validate": in production, we NEVER want Hibernate auto-modifying the
+      # schema. This setting only checks that the schema MATCHES our entities
+      # at startup, and fails fast if it doesn't - actual schema changes
+      # should go through a reviewed migration tool (Flyway/Liquibase).
+      ddl-auto: validate
+    show-sql: false
+
+logging:
+  level:
+    root: warn
+    com.example.bookstore: info
+
+# NOTE: to actually run with this profile, you'd also need to add a MySQL
+# (or Postgres, etc.) driver dependency to pom.xml - it's omitted here since
+# this demo project is meant to run out-of-the-box with H2 (the "dev" profile).
